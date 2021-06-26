@@ -1,0 +1,22 @@
+{
+  "name": "algorithms-study",
+  "version": "1.0.0",
+  "description": "算法学习",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eddieyg/algorithm-study.git"
+  },
+  "keywords": [
+    "algorithm"
+  ],
+  "author": "eddieyg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eddieyg/algorithm-study/issues"
+  },
+  "homepage": "https://github.com/eddieyg/algorithm-study#readme"
+}
