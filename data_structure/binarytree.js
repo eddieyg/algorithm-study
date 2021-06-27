@@ -108,6 +108,37 @@ function rebuildNode(pre, vin) {
   return result
 }
 
+// 生成镜像对称二叉树
+function toMirror(root) {
+  if (root) {
+    let stash = root.left
+    root.left = root.right
+    root.right = stash
+    toMirror(root.left)
+    toMirror(root.right)
+    return root
+  }
+}
+// 判断是否是对称二叉树
+function isSymmetrical(root1, root2) {
+  if (!root1 && !root2) return true
+  if (!root1 || !root2) return false
+  if (root1.val != root2.val) return false
+  return isSymmetrical(root1.left, root2.right) && isSymmetrical(root1.right, root2.left)
+}
+
 let preArr = recursion('lt', bTree)
 let vinArr = iter('ct', bTree)
-console.log(preArr, vinArr, rebuildNode(preArr, vinArr))
+let symTree = { val: '0', left: bTree }
+symTree.right = toMirror(JSON.parse(JSON.stringify(bTree)))
+
+console.log(
+  preArr, 
+  vinArr, 
+  rebuildNode(preArr, vinArr),
+)
+console.log(
+  'Mirror',
+  symTree,
+  isSymmetrical(symTree, symTree),
+)
