@@ -10,7 +10,12 @@ let bTree = {
   },
   right: {
     val: '1-2',
-    left: { val: '1-2-1' },
+    left: { 
+      val: '1-2-1',
+      left: {
+        val: '1-2-1-1',
+      }
+    },
     right: { val: '1-2-2' },
   }
 }
@@ -126,6 +131,33 @@ function isSymmetrical(root1, root2) {
   if (root1.val != root2.val) return false
   return isSymmetrical(root1.left, root2.right) && isSymmetrical(root1.right, root2.left)
 }
+// 二叉树最大深度
+function maxDepth(root) {
+  let num = 0
+  if (root) {
+    let l = maxDepth(root.left)
+    let r = maxDepth(root.right)
+    num = Math.max(l, r) + 1
+    // console.log(
+    //   root.val,
+    //   l,
+    //   r,
+    //   num,
+    // )
+  }
+  return num
+}
+// 二叉树最小深度
+function minDepth(root) {
+  if (!root) return 0
+  if (!root.left) {
+    return 1 + minDepth(root.right)
+  }
+  if (!root.right) {
+    return 1 + minDepth(root.left)
+  }
+  return Math.min(minDepth(root.left), minDepth(root.right)) + 1
+}
 
 let preArr = recursion('lt', bTree)
 let vinArr = iter('ct', bTree)
@@ -141,4 +173,12 @@ console.log(
   'Mirror',
   symTree,
   isSymmetrical(symTree, symTree),
+)
+console.log(
+  'maxDepth',
+  maxDepth(bTree),
+)
+console.log(
+  'minDepth',
+  minDepth(bTree),
 )
