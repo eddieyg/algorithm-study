@@ -131,6 +131,47 @@ function isSymmetrical(root1, root2) {
   if (root1.val != root2.val) return false
   return isSymmetrical(root1.left, root2.right) && isSymmetrical(root1.right, root2.left)
 }
+
+/**
+ * 找到二叉搜索树 第k小节点
+ * 解析：二叉搜索树值的规律为 左子树大于根节点 根节点大于右节点
+ */
+function kthNode(root, k) {
+  if (k <= 0) return null
+  let arr = []
+  let curr = root
+  let stack = []
+  while(curr || stack.length) {
+    while(curr) {
+      stack.push(curr)
+      curr = curr.left
+    }
+    let last = stack.pop()
+    if (arr.length + 1 >= k) {
+      return last
+    }
+    arr.push(last)
+    curr = last.right
+  }
+}
+let searchTree = {
+  val: 4,
+  left: {
+    val: 2,
+    left: { val: 1 },
+    right: { val: 3 }
+  },
+  right: {
+    val: 6,
+    left: { val: 5 },
+    right: { val: 7 }
+  },
+}
+console.log(
+  '二叉搜索树 第k小节点',
+  kthNode(searchTree, 6)
+)
+
 // 二叉树最大深度
 function maxDepth(root) {
   let num = 0
