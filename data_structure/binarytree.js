@@ -199,6 +199,19 @@ function minDepth(root) {
   }
   return Math.min(minDepth(root.left), minDepth(root.right)) + 1
 }
+/**
+ * 判断平衡二叉树
+ * 解析：平衡二叉树 首先是一颗二叉搜索树 其左右子树深度之差不超过1
+ */
+function isBalanced(root) {
+  if (!root) return 0
+  let leftH = isBalanced(root.left)
+  let rightH = isBalanced(root.right)
+  if (leftH === -1 || rightH === -1 || Math.abs(leftH - rightH) > 1) {
+    return -1
+  }
+  return Math.max(leftH, rightH) + 1
+}
 
 let preArr = recursion('lt', bTree)
 let vinArr = iter('ct', bTree)
@@ -222,4 +235,8 @@ console.log(
 console.log(
   'minDepth',
   minDepth(bTree),
+)
+console.log(
+  '判断平衡二叉树',
+  isBalanced(bTree),
 )
